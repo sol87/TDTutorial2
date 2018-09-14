@@ -1,0 +1,1211 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+	\def\TeX{\mbox{T\kern-.14em\lower.5ex\hbox{E}\kern-.115em X}}
+	\def\LaTeX{\mbox{L\kern-.325em\raise.21em\hbox{$\scriptstyle{A}$}\kern-.17em}\TeX}
+
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Lesson3 Python?????}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Lesson3
+Python开发初体验}\label{lesson3-pythonux5f00ux53d1ux521dux4f53ux9a8c}
+
+    \subsection{课程内容}\label{ux8bfeux7a0bux5185ux5bb9}
+
+同学，你好！很高兴能够一起进入Python学习的奇妙旅程。
+
+在上一次课中，我们已经安装好了Python的运行环境，你应该已经成功运行了``Hello
+World''程序了。
+
+今天这节课，我们将向大家讲解以下几个内容：
+
+\begin{itemize}
+\tightlist
+\item
+  第一个命令保留字\texttt{print}
+\item
+  字符串
+\item
+  注释
+\item
+  常见异常
+\item
+  基本数据类型
+\item
+  类型相关的内建函数
+\end{itemize}
+
+    \subsection{\texorpdfstring{第一个命令保留字\texttt{print}}{第一个命令保留字print}}\label{ux7b2cux4e00ux4e2aux547dux4ee4ux4fddux7559ux5b57print}
+
+回顾一下``Hello word''程序：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello world.}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello world.
+
+    \end{Verbatim}
+
+    在这段代码中存在两个部分的内容，分别是不带引号的\texttt{print}和被引号包围的的\texttt{“hello\ world.”}
+
+这段代码的功能是在返回区打印 \texttt{hello\ world.}这个句子。
+
+显然，\texttt{print}这个单词在这里是一个\textbf{命令}性质的内容，它会促使后方的内容被打印出来；而\texttt{“hello\ world.”}则是被打印出来的\textbf{数据}性质的内容。
+
+你可以尝试用\texttt{print}这个命令语句打印别的内容，比如：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{print} \PY{l+m+mi}{123}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello again.}\PY{l+s+s2}{\PYZdq{}}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{===}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+123
+hello again.
+===
+
+    \end{Verbatim}
+
+    \textgreater{}
+注意：在Python3中，\texttt{print}不再作为命令保留字存在，而是以内建函数的方式存在。如果你使用的是Python3，你需要这么打印：
+\texttt{print("hello\ world")}
+
+    在python中，像\texttt{print}这样有确切功能的单词还有很多，它们可以直接被Python解释器识别并发挥作用。这些Python原生支持的功能型单词代码被称为\textbf{保留字}。
+在之后的课程中我们会逐渐学习到更多的Python保留字。
+
+    \subsubsection{Python2.7中的保留字列表}\label{python2.7ux4e2dux7684ux4fddux7559ux5b57ux5217ux8868}
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+保留字 & 说明\tabularnewline
+\midrule
+\endhead
+and & 用于表达式运算，逻辑与操作\tabularnewline
+as & 用于类型转换\tabularnewline
+assert & 断言，用于判断变量或条件表达式的值是否为真\tabularnewline
+break & 中断循环语句的执行\tabularnewline
+class & 用于定义类\tabularnewline
+continue & 继续执行下一次循环\tabularnewline
+def & 用于定义函数或方法\tabularnewline
+del & 删除变量或者序列的值\tabularnewline
+elif & 条件语句 与if else 结合使用\tabularnewline
+else &
+条件语句，与if,elif结合使用。也可以用于异常和循环使用\tabularnewline
+except & 包括捕获异常后的操作代码，与try，finally结合使用\tabularnewline
+exec & 用于执行python语句\tabularnewline
+for & 循环语句\tabularnewline
+finally &
+用于异常语句，出现异常后，始终要执行finally包含的代码块。与try,except结合使用\tabularnewline
+from & 用于导入模块，与import结合使用\tabularnewline
+global & 定义全局变量\tabularnewline
+if & 条件语句，与else，elif结合使用\tabularnewline
+import & 用于导入模块，与from 结合使用\tabularnewline
+in & 判断变量是否存在序列中\tabularnewline
+is & 判断变量是否为某个类的实例\tabularnewline
+lambda & 定义匿名函数\tabularnewline
+not & 用于表达式运算，逻辑非操作\tabularnewline
+or & 用于表达式运算，逻辑或操作\tabularnewline
+pass & 空的类，函数，方法的占位符\tabularnewline
+print & 打印语句\tabularnewline
+raise & 异常抛出操作\tabularnewline
+return & 用于从函数返回计算结果\tabularnewline
+try & 包含可能会出现异常的语句，与except，finally结合使用\tabularnewline
+while & 循环语句\tabularnewline
+with & 简化Python的语句\tabularnewline
+yield & 用于从函数依次返回值\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsection{字符串}\label{ux5b57ux7b26ux4e32}
+
+在``hello world''的案例中，\texttt{"hello\ world."}就是一个字符串。
+
+与保留字不同,字符串并不具备命令功能，而仅仅是表示一段文字信息的数据内容。
+
+字符串的一个典型特征就是由\textbf{引号(\texttt{\textquotesingle{}}或\texttt{"})}包围。
+
+任何字符或空字符都可以作为字符串的内容，以下这些例子都是正确的字符串。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{how are you?}\PY{l+s+s1}{\PYZsq{}}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{I}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{m fine. Thank you, and you?}\PY{l+s+s2}{\PYZdq{}}
+        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{123456}\PY{l+s+s1}{\PYZsq{}}
+        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{!@\PYZsh{}\PYZdl{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZca{}\PYZam{}()*\PYZca{}\PYZam{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}
+        \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{这是一个字符串}\PY{l+s+s1}{\PYZsq{}}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} ''
+\end{Verbatim}
+            
+    在上方的例子中，我们可以看到无论是单引号\texttt{\textquotesingle{}}还是双引号\texttt{"}都可以正确地表示字符串，但是并不会受另外的字符串影响。
+
+这意味着，当你的字符串中需要出现单引号时，你可以在最外层使用双引号。反之亦然。
+
+\textgreater{}
+注意，在Python中，单引号和双引号都可以正确表示字符串，但只有英文模式下的引号是正确的。
+\textgreater{} \textgreater{}
+作为初学者，我应当在我的代码中使用双引号还是单引号？我的答案是，任意一种，但不要随意切换。
+
+    除了单行的字符串外，我们还可以使用一对三个一组的引号包围一段文字来实现跨越多行的字符串。如：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} 双引号可以让字符串跨越多行}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{l+s+s2}{This is a multi\PYZhy{}line string.}
+        \PY{l+s+s2}{It has two lines.}
+        \PY{l+s+s2}{\PYZdq{}\PYZdq{}\PYZdq{}}
+        \PY{c+c1}{\PYZsh{} 单引号同样可以}
+        \PY{k}{print} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+s1}{Not only double qoute can make a string,}
+        \PY{l+s+s1}{Apostrophe is also ok.}
+        \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+This is a multi-line string.
+It has two lines.
+
+
+Not only double qoute can make a string,
+Apostrophe is also ok.
+
+
+    \end{Verbatim}
+
+    同样的，三引号也是需要相同的，不支持混用。
+
+    \subsubsection{转义字符}\label{ux8f6cux4e49ux5b57ux7b26}
+
+除了使用三引号的方式，还有别的方式表达换行吗？
+
+答案是肯定的，你可以使用\texttt{"\textbackslash{}n"}来表示一个换行符。当这个标记出现在一个字符串当中时，即会被识别为换行符。如：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{后面是一个换行符}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{前面是一个换行符}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+后面是一个换行符
+前面是一个换行符
+
+    \end{Verbatim}
+
+    除了换行符之外，在字符串中，很多特殊功能都可以使用以\texttt{\textbackslash{}}开头的特殊字符表示，这种特殊的字符被称为\textbf{转义字符}。常见的转义字符有：
+
+\textbar{}转义字符\textbar{} 作用描述\textbar{}
+\textbar{}-\textbar{}-\textbar{} \textbar{}~(在行尾时)\textbar{} 续行符
+\textbar{}\textbackslash{}\textbar{} 反斜杠符号 \textbar{}'\textbar{}
+单引号 \textbar{}"\textbar{} 双引号 \textbar{}\a\textbar{} 响铃
+\textbar{}\b\textbar{} 退格(Backspace) \textbar{}\e\textbar{} 转义
+\textbar{}\000\textbar{} 空 \textbar{}\n\textbar{} 换行 \textbar{}\v|
+纵向制表符 \textbar{}\t\textbar{} 横向制表符 \textbar{}\r\textbar{} 回车
+\textbar{}\f\textbar{} 换页 \textbar{}\oyy\textbar{}
+八进制数，yy代表的字符，例如：\o12代表换行 \textbar{}\xyy\textbar{}
+十六进制数，yy代表的字符，例如：\x0a代表换行 \textbar{}\other\textbar{}
+其它的字符以普通格式输出
+
+    \textgreater{} 思考一下：
+当一段字符串中需要同时出现单引号和双引号的情况，应当如何表示？例如，将下述内容转换为字符串\\
+\textgreater{} \textgreater{}
+\emph{用"符号和'符号包围一段内容都可以表示这段内容是字符串。}
+
+    有关各类转义符的作用，现在你只需要有所了解即可，在之后的学习和工作中你会自然地接触这些案例，我建议你到用到的时候再去记忆它们。早点忘记这些细节，始终记得有这种存在才是帮助你减轻学习负担、抓住学习重点的关键！
+
+    \subsection{注释}\label{ux6ce8ux91ca}
+
+任何一门编程语言都有注释的功能，也就是使用一类特殊的符号装饰使得部分代码不会被运行的功能。
+
+在Python当中\texttt{\#}是一个合法的注释符，在同一行内，\#右侧的代码将被识别为注释内容从而失去功能性。
+
+\textgreater{}
+代码是写给人阅读的，顺便用于运行。如果代码是写给机器阅读的，那么我们应该使用二进制机器码编程。
+------ Harold Abelson 与 Gerald Jay Sussman,
+计算机科学家和作家，摘自《The Structure and Interpretation of Computer
+Programs》
+
+\textgreater{}
+注释纵然可以解释一些事情，但也不宜滥用。好的代码自己本身就是最好的文档。当你打算加注释的时候，问问自己`我如何才能把我的代码改善到不需增加注释？'重构自己的代码，然后使文档让其更清楚。
+--- Steve McConnell《代码大全》的作者
+
+    正确使用注释的范例：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} 在行首插入\PYZsh{}，占用一行的注释下方代码}
+        \PY{k}{print} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello world.}\PY{l+s+s2}{\PYZdq{}}    \PY{c+c1}{\PYZsh{} 在一段代码后插入\PYZsh{}，注释该行代码。}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+hello world.
+
+    \end{Verbatim}
+
+    \textgreater{} 思考题\\
+\textgreater{} \textgreater{}
+思考一下，下面这段代码运行之后会发生什么？如果你已经有答案了，能不能说出原因？
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{print} \StringTok{"这段字符串中有一个#存在。"}
+\end{Highlighting}
+\end{Shaded}
+
+    除了\texttt{\#}之外，你还可以使用上文中提到的三对引号实现的跨行字符串来实现多行注释内容。这种注释通常被用于模块、函数、类等代码块的注释，也被称为``Doc
+String''。
+
+\textgreater{}
+有一些第三方文档生成服务可以通过解析python源代码，自动找到代码中的doc
+string生成文档。有很多成熟的python包都是用这种方式生成的文档。
+
+代码示例：
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{"""}
+\CommentTok{这是一段跨行的注释内容，}
+\CommentTok{可以用于Python代码块文档的注释。}
+\CommentTok{"""}
+\end{Highlighting}
+\end{Shaded}
+
+    \subsection{常见异常}\label{ux5e38ux89c1ux5f02ux5e38}
+
+Python是一种解释型语言，当你执行一段代码的时候，就相当于你向解释器推送了一坨数据。解释器会实时地分析这些数据，把它们变成一个个简短的计算机指令，然后调用CPU、内存等硬件来执行。
+
+\textgreater{}
+解释器与编译器：编译器像是一家文档翻译公司，程序员将写好的代码寄给编译器，编译器一次性翻译完再转交给机器；而解释器则像一个同声口译专员，程序员一边讲，解释器会实时地翻译这些内容给机器。
+
+在这个过程中，解释器不但负责翻译，还会负责查错。当你输入的代码不符合规范，或是在运行的时候出现了意料之外的中断时，解释器都会将其视作当作\texttt{异常}来处理，进入异常处理程序，收集错误信息并反馈给你。
+
+\textgreater{}
+作为开发者，你几乎每天都要和异常相处。相信我，纵使最优秀的程序员也是在不断地出现异常和解决异常中将程序开发出来的。
+\textgreater{} \textgreater{}
+作为一位初学者，如果你勤于练习，那么你一定会面临大量的异常。不用担心,
+这并不可怕。我相信这个阶段你所遇到的异常虽然很多单种类并不见得丰富。所以此时你只需要要掌握几种最为常见的异常，即可应对大部分的问题。
+
+    \subsubsection{定位异常的位置}\label{ux5b9aux4f4dux5f02ux5e38ux7684ux4f4dux7f6e}
+
+通常情况下，当你运行的代码发生了异常的时候，运行环境会显示出解释器抛出的异常信息。异常概况通常会显示在异常信息的最后一行，在此之前会显示异常回溯（trace
+back）信息。
+
+\begin{figure}[htbp]
+\centering
+\includegraphics{attachment:image.png}
+\caption{image.png}
+\end{figure}
+
+如上图所示，红色线框内的内容即是异常回溯信息；紫色线框内的内容是异常概况信息。
+
+当发生异常时，你可以通过异常概况中的异常类型和描述来推测发生了什么。但是在实际开发中，异常的定位难度远大于解决异常本身，大部分情况下，你需要阅读回溯信息来找到发生异常的位置。
+
+异常回溯信息中，每一行的末尾都有一个行号。你可以根据行号的提示找到发生异常的位置。
+
+    \subsubsection{常见异常1
+语法错误（SyntaxError）}\label{ux5e38ux89c1ux5f02ux5e381-ux8bedux6cd5ux9519ux8befsyntaxerror}
+
+这可能是你遇到的最多的错误。如果你在运行中遇到了这个错误，那么你只需要检查自己有没有写错单词或者标点符号即可。
+
+\textgreater{}
+大多数语法错误都是经验不足的阶段才会犯的，所以如果你检查了很久都没有办法定位错误的话，找个老鸟问一下肯定可以轻轻松松地解决这种错误。
+
+    \subsubsection{常见异常2
+缩进错误（IndentationError）}\label{ux5e38ux89c1ux5f02ux5e382-ux7f29ux8fdbux9519ux8befindentationerror}
+
+Python是依靠缩进来判断代码作用域的语言，因此缩进在Python中是一种严格的规则。
+
+在初学阶段你可能会经常遇到这个错误。不用担心，这是最容易解决的错误。一段时间后，你就不会总是出现这个问题了。
+
+\textgreater{}
+你可以使用空格或tab作为缩进依据，绝对不要混合使用。如果你希望我推荐一种缩进的方式，我建议你使用4个空格作为一级缩进。
+
+    \subsubsection{更多的异常}\label{ux66f4ux591aux7684ux5f02ux5e38}
+
+还有很多异常，但它们并没有前面提到的两种出现的频率高。你会在之后的学习和实践中不断地认识它们的。
+
+下表是所有Python标准异常的简介，希望对你有用
+
+\begin{longtable}[c]{@{}ll@{}}
+\toprule
+异常名称 & 描述\tabularnewline
+\midrule
+\endhead
+BaseException & 所有异常的基类\tabularnewline
+SystemExit & 解释器请求退出\tabularnewline
+KeyboardInterrupt & 用户中断执行(通常是输入\^{}C)\tabularnewline
+Exception & 常规错误的基类\tabularnewline
+StopIteration & 迭代器没有更多的值\tabularnewline
+GeneratorExit & 生成器(generator)发生异常来通知退出\tabularnewline
+StandardError & 所有的内建标准异常的基类\tabularnewline
+ArithmeticError & 所有数值计算错误的基类\tabularnewline
+FloatingPointError & 浮点计算错误\tabularnewline
+OverflowError & 数值运算超出最大限制\tabularnewline
+ZeroDivisionError & 除(或取模)零 (所有数据类型)\tabularnewline
+AssertionError & 断言语句失败\tabularnewline
+AttributeError & 对象没有这个属性\tabularnewline
+EOFError & 没有内建输入,到达EOF 标记\tabularnewline
+EnvironmentError & 操作系统错误的基类\tabularnewline
+IOError & 输入/输出操作失败\tabularnewline
+OSError & 操作系统错误\tabularnewline
+WindowsError & 系统调用失败\tabularnewline
+ImportError & 导入模块/对象失败\tabularnewline
+LookupError & 无效数据查询的基类\tabularnewline
+IndexError & 序列中没有此索引(index)\tabularnewline
+KeyError & 映射中没有这个键\tabularnewline
+MemoryError & 内存溢出错误(对于Python 解释器不是致命的)\tabularnewline
+NameError & 未声明/初始化对象 (没有属性)\tabularnewline
+UnboundLocalError & 访问未初始化的本地变量\tabularnewline
+ReferenceError & 弱引用(Weak
+reference)试图访问已经垃圾回收了的对象\tabularnewline
+RuntimeError & 一般的运行时错误\tabularnewline
+NotImplementedError & 尚未实现的方法\tabularnewline
+SyntaxError & Python 语法错误\tabularnewline
+IndentationError & 缩进错误\tabularnewline
+TabError & Tab 和空格混用\tabularnewline
+SystemError & 一般的解释器系统错误\tabularnewline
+TypeError & 对类型无效的操作\tabularnewline
+ValueError & 传入无效的参数\tabularnewline
+UnicodeError & Unicode 相关的错误\tabularnewline
+UnicodeDecodeError & Unicode 解码时的错误\tabularnewline
+UnicodeEncodeError & Unicode 编码时错误\tabularnewline
+UnicodeTranslateError & Unicode 转换时错误\tabularnewline
+Warning & 警告的基类\tabularnewline
+DeprecationWarning & 关于被弃用的特征的警告\tabularnewline
+FutureWarning & 关于构造将来语义会有改变的警告\tabularnewline
+OverflowWarning & 旧的关于自动提升为长整型(long)的警告\tabularnewline
+PendingDeprecationWarning & 关于特性将会被废弃的警告\tabularnewline
+RuntimeWarning & 可疑的运行时行为(runtime behavior)的警告\tabularnewline
+SyntaxWarning & 可疑的语法的警告\tabularnewline
+UserWarning & 用户代码生成的警告\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsection{基础数据类型与运算}\label{ux57faux7840ux6570ux636eux7c7bux578bux4e0eux8fd0ux7b97}
+
+讲完了print和字符串，我们已经可以让代码替我们表达信息了。但是这样的操作好像并没有发挥出计算机的功能来。下面我们就来认识一下除了字符串以外的几种基本数据类型。
+
+\subsubsection{整数Int}\label{ux6574ux6570int}
+
+在Python中，十进制的整数可以无需任何修饰直接表示自身数值。
+
+\textgreater{}
+2进制、8进制和16进制的整数也都有自己的表示方式，如果对你有用，自己上网搜索表示方法。
+
+\textgreater{}
+Python当中的整数对于位数的限制并不明确，一般情况下并不会出现位数溢出的情况。当数值超过一定位数时，解释器会自动将其转为长整型（Long）以防止溢出。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{l+m+mi}{1234}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 1234
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{l+m+mi}{999999999999999999999999999999999999999}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 999999999999999999999999999999999999999L
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{o}{\PYZhy{}}\PY{l+m+mi}{998}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} -998
+\end{Verbatim}
+            
+    \subsubsection{浮点数Float}\label{ux6d6eux70b9ux6570float}
+
+浮点数即是小数。在绝大多数编程语言中，浮点数的精度都是有限的。在Python中，浮点数使用本机双精度(64
+bit)表示，精度可以达到小数点后大约15到17位。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{l+m+mf}{3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 3.141592653589793
+\end{Verbatim}
+            
+    \textgreater{}
+超过17位的小数可以考虑使用decimal模块来实现，如果你真的需要具体方法，请自行谷歌。
+
+    \textgreater{}
+除了整数和浮点数外，Python还支持诸如复数这样更加复杂的数学类型，你可以使用Math模块来实现这些高级数学运算。
+
+    \textgreater{} 思考一下，整数和浮点数在内存中是如何存储的？
+
+    \subsubsection{布尔值Bool}\label{ux5e03ux5c14ux503cbool}
+
+布尔值（\texttt{Bool}）是计算机科学中的逻辑数据类型，以发明布尔代数的数学家乔治·布尔为名。它是只有两种值的原始类型，在Python中是\texttt{True}和\texttt{False}。
+
+布尔运算在计算机科学领域具有崇高的地位，不夸张地说整个计算机科学都是建立在这种基本的算法基础上的。在后续的课程当中，我们将会越来越深入地理解这种数据类型的作用。
+
+    \textgreater{} 在Python中，所有的对象都可以被解析为布尔值。
+\textgreater{} \textgreater{}
+在布尔运算中，除了True和False外，任何非零数字或非空对象都会被解析为True，数字零、空对象以及特殊对象None都被解析为Flase。
+
+    \subsubsection{空值（None）}\label{ux7a7aux503cnone}
+
+这是一个空对象，在转成布尔值时等价于False，在Python中，它只有一种表示，即\texttt{None}。
+
+这个数据类型存在的意义在于描述那些没有返回值的表达式或调用结果。如果你现在无法理解这句话的涵义，那就先忽略这件事。不用担心，在后续的学习中，你会逐渐理解。
+
+    \subsubsection{运算符}\label{ux8fd0ux7b97ux7b26}
+
+为了实现数学运算的功能，Python提供了算数运算符合逻辑运算符两种运算符号。在Python代码中，由数据和运算符组成的表达式将会被求值运算，并得到返回结果。你可以理解为表达式所指代的即为其结果。如：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{l+m+mi}{1} \PY{o}{+} \PY{l+m+mi}{1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 2
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{l+m+mi}{456} \PY{o}{*} \PY{l+m+mi}{123}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} 56088
+\end{Verbatim}
+            
+    \paragraph{算数运算符}\label{ux7b97ux6570ux8fd0ux7b97ux7b26}
+
+常见的数学运算，都可以直接使用Python原生提供的算数运算符进行求值。下表为常用的算数运算符
+
+\begin{longtable}[c]{@{}lll@{}}
+\toprule
+运算符 & 描述 & 示例\tabularnewline
+\midrule
+\endhead
++ & 加 & 1 + 2 输出结果 3\tabularnewline
+- & 减 & 1 - 2 输出结果 -1\tabularnewline
+* & 乘 & 1 * 2 输出结果 2\tabularnewline
+/ & 除 & 2 / 1 输出结果 2, 9 / 2 在Python2中输出结果为4\tabularnewline
+// & 整除 & 9//2 输出结果 4 , 9.0//2.0 输出结果 4.0\tabularnewline
+\% & 取余 & 2 \% 1 输出结果 0\tabularnewline
+** & 乘方 & 3**2 为3的平方， 输出结果 9\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subparagraph{数字类型的算数运算}\label{ux6570ux5b57ux7c7bux578bux7684ux7b97ux6570ux8fd0ux7b97}
+
+在Python中创建的算数运算表达式将会以普通的数学运算优先级顺序被计算，即符合乘除优先，从左向右的原则计算。同样的，你也可以使用小括号来改变运算的顺序。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{l+m+mi}{3} \PY{o}{+} \PY{l+m+mi}{5} \PY{o}{*} \PY{l+m+mi}{6}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 33
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{l+m+mi}{12} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} 3
+\end{Verbatim}
+            
+    在Python2中，仅有整数参与的算数运算其结果也是整数。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{l+m+mi}{10} \PY{o}{/} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} 3
+\end{Verbatim}
+            
+    \textgreater{}
+注意：在python3中，当出现无法整除的情况时，除法会得到浮点数结果。
+
+    求余运算算也叫求模运算，是程序开发中（尤其是加密算法中）经常需要进行的一种计算。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{l+m+mi}{10} \PY{o}{\PYZpc{}} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 1
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{l+m+mf}{1.1} \PY{o}{\PYZpc{}} \PY{l+m+mf}{0.3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 0.20000000000000012
+\end{Verbatim}
+            
+    \textgreater{}
+注意：虽然Python允许对浮点数进行求余，但我并不建议你在开发中这么写。
+
+    \textgreater{} 思考以下几个问题: - 减法在内存操作层面是如何实现的？ -
+求余运算在内存操作层面是如何实现的？
+
+    \subparagraph{非数字类型的算数运算}\label{ux975eux6570ux5b57ux7c7bux578bux7684ux7b97ux6570ux8fd0ux7b97}
+
+除了数字类型可以做算数运算外，一些非数字的类型也可以进行算数运算。
+例如前面我们学习过的字符串。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} 字符串的加法}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello}\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{world}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 'helloworld'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{} 字符串的乘法}
+        \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello}\PY{l+s+s2}{\PYZdq{}} \PY{o}{*} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 'HelloHelloHelloHelloHello'
+\end{Verbatim}
+            
+    有一种有趣的现象，bool类型中的\texttt{True}和\texttt{False}在算术运算中会被当做整数\texttt{1}和\texttt{0}计算，如：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n+nb+bp}{False} \PY{o}{+} \PY{n+nb+bp}{True} \PY{o}{*} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} 3
+\end{Verbatim}
+            
+    \paragraph{比较运算符}\label{ux6bd4ux8f83ux8fd0ux7b97ux7b26}
+
+比较运算表达式通常由数据对象和比较符号（即比较运算符）组成，其返回的结果通常为一个布尔值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{l+m+mi}{5} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{l+m+mi}{3} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{l+m+mi}{2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZgt{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{World}\PY{l+s+s2}{\PYZdq{}} 
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} False
+\end{Verbatim}
+            
+    \textgreater{}
+思考一下，在上一个题中\texttt{"Hello"}为什么比\texttt{"World"}更``小''？
+
+    下表列举了Python中常用的比较运算符
+
+\begin{longtable}[c]{@{}lll@{}}
+\toprule
+运算符 & 描述 & 实例\tabularnewline
+\midrule
+\endhead
+== & 等于 - 比较对象是否相等 & (5 == 10) 返回 False\tabularnewline
+!= & 不等于 & (5 != 10) 返回 True\tabularnewline
+\textless{}\textgreater{} & 不等于 & (5 \textless{}\textgreater{} 10)
+返回 True。等价于 !=\tabularnewline
+\textgreater{} & 大于 & (5 \textgreater{} 10) 返回 False\tabularnewline
+\textless{} & 小于 & (5 \textless{} 10) 返回 True\tabularnewline
+\textgreater{}= & 大于等于 - 返回x是否大于等于y。 & (5 \textgreater{}=
+10) 返回 False\tabularnewline
+\textless{}= & 小于等于 - 返回x是否小于等于y。 & (5 \textless{}= 10)
+返回 true\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \textgreater{} \textbf{一个特殊的比较运算符------\texttt{is}}
+\textgreater{} \textgreater{}
+\texttt{is}是一个类似于\texttt{==}的比较运算符，但它们之间有着本质上的区别。\texttt{is}比较的是两者是否指向同一个Python对象,
+而\texttt{==}比较的是两者的值是否一致。如果你先在还无法理解这句话，不要担心。后续课程中，我们将会更大程度上的展开这些内容。
+
+    \subsubsection{逻辑运算符}\label{ux903bux8f91ux8fd0ux7b97ux7b26}
+
+逻辑运算是对一个或多个布尔值进行操作，并得到一个新的布尔值的计算方式。和比较运算符相似，这种运算返回的结果通常为一个布尔值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{l+m+mi}{5} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4} \PY{o+ow}{and} \PY{l+m+mi}{4} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{l+m+mi}{5} \PY{o}{\PYZgt{}} \PY{l+m+mi}{4} \PY{o+ow}{or} \PY{n+nb+bp}{False}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} True
+\end{Verbatim}
+            
+    \textgreater{}
+同其他运算方式一样，逻辑运算表达式也支持小括号。使用小括号可以很好地优化代码的可读性。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{l+m+mi}{2} \PY{o}{\PYZgt{}} \PY{l+m+mi}{3} \PY{o+ow}{or} \PY{p}{(}\PY{l+m+mi}{3} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2} \PY{o+ow}{and} \PY{l+m+mi}{5} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} True
+\end{Verbatim}
+            
+    下表列出了Python中的几个逻辑运算符
+
+\begin{longtable}[c]{@{}llll@{}}
+\toprule
+运算符 & 表达式示例 & 描述\tabularnewline
+\midrule
+\endhead
+and & x and y &
+当x与y同时为True时，结果为True，否则为False\tabularnewline
+or & x or y &
+当x与y任意一个为True时，结果为True，否则为False\tabularnewline
+not & not x & 当x为False时，结果为True，否则为False\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \subsubsection{Python中操作数据类型的内建函数}\label{pythonux4e2dux64cdux4f5cux6570ux636eux7c7bux578bux7684ux5185ux5efaux51fdux6570}
+
+在Python中，除了保留字和数据对象以及运算符之外，解释器还默认加载了一些内建的函数命令供你调用。
+
+\textgreater{}
+函数（Function）是一种可调用（callable）的Python对象，你可以在函数名后连接填有参数的小括号来调用它。被调用的函数将会被当做一种表达式被求值。如果你还无法理解这部分内容，不用担心，后续课程我们会详细讲解。
+
+\textgreater{} 内建函数（built-in
+functions）指的是无需定义或导入即可直接使用的函数。
+
+\textgreater{}
+在Python命令行中，你可以使用help命令来查询函数的文档信息，从而了解函数的功能及调用规则。
+
+在本次课中，我们将介绍一部分针对数据类型进行操作的内建函数。
+
+    \paragraph{type()}\label{type}
+
+\texttt{type}函数可以帮助我们获得参数的类型。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{n+nb}{type}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} int
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{n+nb}{type}\PY{p}{(}\PY{l+m+mf}{3.14}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}46}]:} float
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n+nb}{type}\PY{p}{(}\PY{l+m+mi}{4} \PY{o}{/} \PY{l+m+mf}{2.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}49}]:} float
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{n+nb}{type}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{128}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} str
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n+nb}{type}\PY{p}{(}\PY{l+m+mi}{5} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} bool
+\end{Verbatim}
+            
+    \paragraph{isinstance()}\label{isinstance}
+
+isinstance函数用于判断一个Python对象是否为某种给定的类型或属于某些给定类型中的一种，其返回值为布尔类型。
+
+此函数需要填入两个参数，第一个参数可以为任意的Python对象，第二个参数则必须是一种合法的Python类型或一个包含多种类型的列表。
+
+\textgreater{} 列表是一种常用的数据结构类型，下节课我们将深入地讲解。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{n+nb}{isinstance}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}51}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n+nb}{isinstance}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hello world}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n+nb}{isinstance}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n+nb}{isinstance}\PY{p}{(}\PY{l+m+mf}{3.14}\PY{p}{,} \PY{n+nb}{float}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{,} \PY{n+nb}{int}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} True
+\end{Verbatim}
+            
+    \textgreater{}
+注意，在CPython解释器（即Python官网下载的最常用的解释器）中，bool类型为int类型的子类型，因此\texttt{True}会被识别为\texttt{int}类型。
+
+    \paragraph{类型转换函数}\label{ux7c7bux578bux8f6cux6362ux51fdux6570}
+
+\texttt{int},\texttt{float},\texttt{bool},\texttt{str}等函数均可将传入的参数转换为对应的类型并返回。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n+nb}{int}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{123}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} 123
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n+nb}{int}\PY{p}{(}\PY{l+m+mf}{128.456}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} 128
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n+nb}{float}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{3.14159}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} 3.14159
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n+nb}{bool}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}40}]:} False
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n+nb}{bool}\PY{p}{(}\PY{l+m+mi}{999}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n+nb}{bool}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Hello}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} True
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{n+nb}{str}\PY{p}{(}\PY{l+m+mf}{1.414}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} '1.414'
+\end{Verbatim}
+            
+    \subsubsection{本课结语}\label{ux672cux8bfeux7ed3ux8bed}
+
+在本节课中，我们已经学习了以下几个内容： -
+Python内建的一个保留字命令\texttt{print}, -
+Python当中的几种基础数据类型及常用的运算符， -
+针对数据类型进行操作的几个常用内建函数。
+
+如果你还没有熟练地掌握这些知识，我建议你通过以下几种方式提高自己：
+
+\begin{itemize}
+\tightlist
+\item
+  反复地阅读这一节课的内容；
+\item
+  依据本课知识，举一反三地进行更多的练习；
+\item
+  到互联网上浏览和补充相关的知识，完善和巩固知识体系；
+\item
+  在我们的课堂群中和我们进行更多的交流。
+\end{itemize}
+
+如果你觉得本课内容对你有帮助，欢迎到我们的\href{https://ke.qq.com/course/328764?tuin=2a5bd9a8}{课程}中进行评价，给予我们一个珍贵的好评。
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
